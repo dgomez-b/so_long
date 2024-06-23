@@ -13,6 +13,12 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
+# include <fcntl.h>
+# include <sys/fcntl.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <minilibx-linux/mlx.h>
+
 typedef enum e_bool
 {
 	FALSE = 0,
@@ -23,7 +29,7 @@ typedef enum e_direction
 {
 	UP = 0,
 	LEFT = 1,
-	RIGHT = 2, 
+	RIGHT = 2,
 	DOWN = 3
 }	t_direction;
 
@@ -62,5 +68,33 @@ typedef struct s_program
 	t_image		images[5];
 	t_player	player;
 }	t_program;
+
+char			**build_map(int fd);
+void			chk_file_path(char *file_path);
+void			file_path_error(void);
+void			file_extension_error(void);
+void			private_file_error(void);
+void			path_error(char **map);
+void			general_error(char **map);
+t_map			generate_map(char *file_path);
+void			load_images(t_program *program);
+t_bool			is_rectangle(char **map);
+t_bool			has_valid_chars(char **map);
+t_bool			is_closed(char **map);
+t_bool			min_max_chars(char **map);
+t_bool			has_valid_path(char **map);
+void			build_error(void);
+void			rectangle_error(char **map);
+void			char_error(char **map);
+void			min_max_error(char **map);
+void			closed_map_error(char **map);
+char			**map_dup(char **map);
+void			get_player_position(t_program *program);
+void			draw_player(t_program program);
+int				key_hook(int keycode, t_program	*program);
+void			putstr_fd(char *s, int fd);
+void			putnbr_fd(int n, int fd);
+unsigned int	string_length(char *s);
+int				close_program(t_program	*program);
 
 #endif
