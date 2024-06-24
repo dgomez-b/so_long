@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <so_long.h>
+#include "so_long.h"
 
 static unsigned int	*find_end(char **map)
 {
@@ -22,7 +22,7 @@ static unsigned int	*find_end(char **map)
 		position[0] = 0;
 		while (map[position[1]][position[0]])
 		{
-			if (map[position[1]][position[0]] == 'E')
+			if (map[position[1]][position[0]] == 'P')
 				return (position);
 			position[0]++;
 		}
@@ -42,7 +42,7 @@ static t_bool	no_cep(char **map)
 		x = 0;
 		while (map[y][x])
 		{
-			if (map[y][x] == 'C' || map[y][x] == 'E' || map[y][x] == 'P')
+			if (map[y][x] == 'C' || map[y][x] == 'P')
 				return (FALSE);
 			x++;
 		}
@@ -53,7 +53,7 @@ static t_bool	no_cep(char **map)
 
 static void	toggle_next(unsigned int x, unsigned int y, char **map)
 {
-	if (map[y][x] == '1')
+	if (map[y][x] == '1' || map[y][x] == 'E')
 		return ;
 	map[y][x] = '1';
 	toggle_next(x, y + 1, map);

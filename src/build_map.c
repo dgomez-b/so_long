@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <so_long.h>
+#include "so_long.h"
 
 static char	*map_line(int fd)
 {
@@ -24,7 +24,9 @@ static char	*map_line(int fd)
 	{
 		if (i == 0)
 			return (0x0);
-		s = malloc(sizeof(char) * (i + 1));
+		s = 0x0;
+		if (i <= 100)
+			s = malloc(sizeof(char) * (i + 1));
 		if (!s)
 			return (0x0);
 		s[i] = 0;
@@ -45,25 +47,25 @@ char	**build_map(int fd)
 	char				**map;
 	char				*s;
 
+	if (i > 50)
+		return (0x0);
 	s = map_line(fd);
 	if (!s)
 	{
 		if (i == 0)
-			build_error();
+			build_error(fd);
 		map = malloc(sizeof(char *) * (i + 1));
-		if (!map)
-			return (0x0);
-		map[i] = 0x0;
+		if (map != 0x0)
+			map[i] = 0x0;
 		return (map);
 	}
 	i++;
 	map = build_map(fd);
-	if (!map)
-	{
-		if (--i == 0)
-			build_error();
-		return (0x0);
-	}
-	map[--i] = s;
+	if (map != 0x0)
+		map[--i] = s;
+	else
+		free(s);
+	if (map == 0x0 && --i == 0)
+		build_error(fd);
 	return (map);
 }

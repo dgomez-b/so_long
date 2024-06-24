@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <so_long.h>
+#include "so_long.h"
 
 static t_dimensions	get_dimensions(char **map)
 {
@@ -30,6 +30,8 @@ t_map	generate_map(char *file_path)
 
 	fd = open(file_path, O_RDONLY);
 	map.vec = build_map(fd);
+	if (!map.vec)
+		build_error(fd);
 	close(fd);
 	if (!is_rectangle(map.vec))
 		rectangle_error(map.vec);

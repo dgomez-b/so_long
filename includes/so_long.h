@@ -17,7 +17,7 @@
 # include <sys/fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <minilibx-linux/mlx.h>
+# include "minilibx-linux/mlx.h"
 
 typedef enum e_bool
 {
@@ -83,7 +83,7 @@ t_bool			has_valid_chars(char **map);
 t_bool			is_closed(char **map);
 t_bool			min_max_chars(char **map);
 t_bool			has_valid_path(char **map);
-void			build_error(void);
+void			build_error(int fd);
 void			rectangle_error(char **map);
 void			char_error(char **map);
 void			min_max_error(char **map);

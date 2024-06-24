@@ -10,11 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <so_long.h>
+#include "so_long.h"
 
-void	build_error(void)
+void	build_error(int fd)
 {
-	putstr_fd("Error : Map couldn't be builded\n", 1);
+	close (fd);
+	putstr_fd("Error : Map couldn't be built\n", 1);
 	exit (0);
 }
 

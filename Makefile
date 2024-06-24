@@ -29,22 +29,34 @@ SRCS		=	main.c \
 				printers.c \
 				string_length.c \
 				close_program.c
+
 OBJS		=	$(addprefix $(BIN), $(SRCS:.c=.o))
-MLX			=	$(INC)minilibx-linux/mlx.a
-C			=	gcc
+MLX			=	$(INC)minilibx-linux/libmlx.a
+LIBFT		=	$(INC)libft/libft.a
+CC			=	gcc
 CFLAGS		=	-Wall -Wextra -Werror -g3
 
-all			:	$(MLX) $(NAME)
+all			:	$(NAME)
+
 $(BIN)%.o	:	$(SRC)%.c
-				@ $(C) $(CFLAGS) -c -o $@ $^ -I$(INC)
+				@ $(CC) $(CFLAGS) -c -o $@ $^ -I$(INC)
+
 %.a			:
-				@ make -C $(dir $@)
-$(NAME)		:	$(OBJS)
-				@ $(C) $(CFLAGS) -o $@ $^ -L$(dir $(MLX)) -lmlx -lXext -lX11 \
-				-lm -lz
+				@ make -sC $(dir $@)
+
+$(NAME)		:	$(MLX) $(LIBFT) $(OBJS)
+				@ $(CC) $(CFLAGS) -o $@ $^ -L$(dir $(MLX)) -lmlx -lXext -lX11 \
+				-lm -lz -L$(dir $(LIBFT)) -lft
+
 clean		:
 				@ rm -rfv $(OBJS)
+				@ make -sC $(dir $(MLX)) clean
+				@ make -sC $(dir $(LIBFT)) clean
+
 fclean		:	clean
 				@ rm -rfv $(NAME)
+				@ make -sC $(dir $(LIBFT)) fclean
+
 re			:	fclean all
+
 .PHONY		:	all clean fclean re
