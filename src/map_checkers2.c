@@ -6,7 +6,7 @@
 /*   By: dgomez-b <dgomez-b@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 01:27:44 by dgomez-b          #+#    #+#             */
-/*   Updated: 2024/06/24 01:29:00 by dgomez-b         ###   ########.fr       */
+/*   Updated: 2024/06/27 21:27:26 by dgomez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static t_bool	no_cep(char **map)
 		x = 0;
 		while (map[y][x])
 		{
-			if (map[y][x] == 'C' || map[y][x] == 'P')
+			if (map[y][x] == 'C' || map[y][x] == 'E' || map[y][x] == 'P')
 				return (FALSE);
 			x++;
 		}
@@ -53,9 +53,11 @@ static t_bool	no_cep(char **map)
 
 static void	toggle_next(unsigned int x, unsigned int y, char **map)
 {
-	if (map[y][x] == '1' || map[y][x] == 'E')
+	if (map[y][x] == '1')
 		return ;
 	map[y][x] = '1';
+	if (map[y][x] == 'E')
+		return ;
 	toggle_next(x, y + 1, map);
 	toggle_next(x - 1, y, map);
 	toggle_next(x + 1, y, map);
@@ -77,7 +79,11 @@ t_bool	has_valid_path(char **map)
 	chk = no_cep(nm);
 	i = 0;
 	while (nm[i])
+	{
+		putstr_fd(nm[i], 1);
+		putstr_fd("\n", 1);
 		free(nm[i++]);
+	}
 	free(nm);
 	return (chk);
 }
