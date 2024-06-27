@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strtrim.c                                          :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgomez-b <dgomez-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgomez-b <dgomez-b@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:32:18 by dgomez-b          #+#    #+#             */
-/*   Updated: 2023/07/10 16:35:17 by dgomez-b         ###   ########.fr       */
+/*   Updated: 2024/06/27 21:47:57 by dgomez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static size_t	ft_strcmpchrs(char const *s1, char const *set, size_t mov)
 	j = 0;
 	if ((int)mov < 0)
 		j = ft_strlen(s1) - 1;
-	while ((i < len) && (j >= 0))
+	while (i < len)
 	{
 		if (s1[j] == set[i++])
 		{
