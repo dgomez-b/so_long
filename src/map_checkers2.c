@@ -6,7 +6,7 @@
 /*   By: dgomez-b <dgomez-b@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 01:27:44 by dgomez-b          #+#    #+#             */
-/*   Updated: 2024/06/27 21:27:26 by dgomez-b         ###   ########.fr       */
+/*   Updated: 2024/06/27 21:51:19 by dgomez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,7 @@ t_bool	has_valid_path(char **map)
 	chk = no_cep(nm);
 	i = 0;
 	while (nm[i])
-	{
-		putstr_fd(nm[i], 1);
-		putstr_fd("\n", 1);
 		free(nm[i++]);
-	}
 	free(nm);
 	return (chk);
 }
