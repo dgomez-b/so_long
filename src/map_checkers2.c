@@ -6,7 +6,7 @@
 /*   By: dgomez-b <dgomez-b@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 01:27:44 by dgomez-b          #+#    #+#             */
-/*   Updated: 2024/06/27 21:51:19 by dgomez-b         ###   ########.fr       */
+/*   Updated: 2024/07/03 11:35:12 by dgomez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,12 @@ static void	toggle_next(unsigned int x, unsigned int y, char **map)
 {
 	if (map[y][x] == '1')
 		return ;
-	map[y][x] = '1';
 	if (map[y][x] == 'E')
+	{
+		map[y][x] = '1';
 		return ;
+	}
+	map[y][x] = '1';
 	toggle_next(x, y + 1, map);
 	toggle_next(x - 1, y, map);
 	toggle_next(x + 1, y, map);
